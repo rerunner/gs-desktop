@@ -1,11 +1,11 @@
 /*
-   Project: CloudManager
+   Project: VolMon
 
    Copyright (C) 2022 Free Software Foundation
 
-   Author: Parallels
+   Author: ,,,
 
-   Created: 2022-09-16 15:40:26 +0000 by parallels
+   Created: 2022-11-01 20:28:45 +0000 by pi
 
    This application is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,36 +22,17 @@
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111 USA.
 */
 
-#ifndef _SERVICETASK_H_
-#define _SERVICETASK_H_
+#ifndef _MINIVIEW_H_
+#define _MINIVIEW_H_
 
-#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-@interface ServiceTask : NSObject {
-  NSString* name;
-  NSString* remotename;
-  NSString* mountpoint;
-  NSMutableString* log;
-  
-  NSTask* task;
-  NSFileHandle* fh;
-  NSInteger status;
-  NSMutableData* buff;
+@interface MiniView : NSView
+{
+  NSImage *tileImage;
 }
-- (id) initWithName:(NSString*) name;
-- (NSString*) name;
-- (NSInteger) status;
-- (NSString*) message;
-
-- (void) setRemoteName:(NSString*) rn;
-- (NSString*) remoteName;
-- (void) setMountPoint:(NSString*) mp;
-- (NSString*) mountPoint;
-
-- (void) startTask;
-- (void) stopTask;
 
 @end
 
-#endif // _SERVICETASK_H_
+#endif // _MINIVIEW_H_
 

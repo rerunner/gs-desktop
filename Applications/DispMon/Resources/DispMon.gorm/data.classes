@@ -1,0 +1,31 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    AppController = {
+	Actions = (
+	    "showPrefPanel:",
+	    "showDisplayPreferences:",
+	    "changeBrightness:"
+	);
+	Outlets = (
+	    controlView,
+	    brightnessSlider
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "changeBrightness:",
+	    "orderFrontFontPanel:",
+	    "showDisplayPreferences:",
+	    "showPrefPanel:"
+	);
+	Super = NSObject;
+    };
+    MiniView = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSBox;
+    };
+}
