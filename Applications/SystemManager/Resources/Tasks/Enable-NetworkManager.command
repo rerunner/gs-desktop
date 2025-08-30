@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NMCFG="/etc/NetworkManager/NetworkManager.conf";
 NMCFGT="/tmp/nm_$$.txt";
@@ -34,14 +34,17 @@ systemctl start NetworkManager"
 
 #echo "$CMD"
 
-echo ""
-echo " WARNING!!!"
+clear
+echo "******************"
+echo "**  WARNING!!!  **"
+echo "******************"
 echo ""
 echo " this command will reset $NMCFG and $NCFG files"
-echo " <enter> to continue?"
+echo ""
+echo " press <ENTER> to continue, <CTRL-C> to cancel"
 read DD
 
-#sudo sh -c "$CMD"
+sudo sh -c "$CMD"
 
 sleep 2
 nmcli device wifi >/dev/null

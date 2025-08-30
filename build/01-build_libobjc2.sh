@@ -8,7 +8,7 @@ echo "=================="
 
 if [ "x$RUNTIME" = "xgnu" ];then
 	echo "skip, using GNU runtime"
-	exit 0
+	#exit 0
 fi
 if [ "x$RUNTIME" = "xext" ];then
 	echo "skip, using external runtime"
@@ -34,7 +34,7 @@ cmake .. \
 	-DGNUSTEP_INSTALL_TYPE=NONE \
 	-DCMAKE_C_COMPILER=$CC \
 	-DCMAKE_CXX_COMPILER=$CXX \
-	-DCMAKE_C_FLAGS="-DNO_SELECTOR_MISMATCH_WARNINGS -I/System/include -g" \
+	-DCMAKE_C_FLAGS="-fno-builtin -DNO_SELECTOR_MISMATCH_WARNINGS -I/System/include -g" \
 	-DCMAKE_LIBRARY_PATH=/System/lib \
 	-DCMAKE_INSTALL_LIBDIR=/System/lib \
 	-DCMAKE_INSTALL_PREFIX=/System \
