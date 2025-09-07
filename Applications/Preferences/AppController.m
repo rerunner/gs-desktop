@@ -71,6 +71,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotif
 {
+  launched = YES;
+
   OSEScreen* systemScreen = [OSEScreen new];
   [[NSNotificationCenter defaultCenter]
     addObserver:self
@@ -177,6 +179,7 @@
 
 - (void)applicationDidBecomeActive:(NSNotification*)aNotification
 {
+  if (launched) [self showPreferencesWindow];
 }
 
 - (BOOL)application:(NSApplication *)application openFile:(NSString *)fileName

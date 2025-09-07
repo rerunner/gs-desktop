@@ -31,6 +31,8 @@
 
   // Info -> Info Panel
   id infoPanel;
+
+  BOOL launched;
 }
 
 - (void)showPreferencesWindow;

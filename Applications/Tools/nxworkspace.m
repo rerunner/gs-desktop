@@ -41,6 +41,8 @@ void printUsage() {
   fprintf(stderr, "  --autolaunch <app>    autolaunch application\n");
   fprintf(stderr, "  --activate <app>      launch or activate application\n");
   fprintf(stderr, "  --activate            activate the Workspace\n");
+  fprintf(stderr, "  --hide <app>          hide application\n");
+  fprintf(stderr, "  --hide                hide the Workspace\n");
   fprintf(stderr, "  --fileviewer          show root file viewer\n");
   fprintf(stderr, "  --logout              logout from Workspace\n");
   fprintf(stderr, "  --terminate           terminate Workspace and all running apps\n");
@@ -123,6 +125,15 @@ int main(int argc, char** argv, char** env)
       NSString* app = [arguments objectAtIndex:2];
 
       [ws launchApplication:app];
+    }
+    else if ([[arguments objectAtIndex:1] isEqualToString:@"--hide"]) {
+      NSString* name = @"GWorkspace";
+      if ([arguments count] >= 3) name = [arguments objectAtIndex:2];
+
+      id app = [NSConnection rootProxyForConnectionWithRegisteredName:name host:@""];
+      if (app) {
+        [app hide:nil];
+      }
     }
     else if ([[arguments objectAtIndex:1] isEqualToString:@"--autolaunch"] && [arguments count] == 3) {
       NSWorkspace* ws = [NSWorkspace sharedWorkspace];

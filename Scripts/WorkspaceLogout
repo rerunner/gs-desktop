@@ -7,16 +7,38 @@ sleep 0.5
 # we should be logging out now
 /Library/bin/nxworkspace --ping && exit
 
-C=10
-while [ "$C" -ne 0 ];do
-  /Library/bin/nxworkspace --ping || break
+function status {
+  echo "$1"
+   /System/bin/wmshowstatus "$1" "darkgray"
+}
 
-  C=$((C - 1))
-  sleep 1
-done
+function logout_process {
+  status "logging out"
+  /Library/bin/nxworkspace --hide
+  C=10
+  while [ "$C" -ne 0 ];do
+    /Library/bin/nxworkspace --ping 
+    RV=$?
+    if [ "$RV" -eq 1 ];then 
+      break
+    fi
 
-WM_PID=`cat /tmp/$UID-wm.pid`
-sleep 0.5
-if [ -n "$WM_PID" ];then
-  kill -HUP $WM_PID
-fi
+    # still in logging out
+    C=$((C - 1))
+
+    status "wait for applications to terminate $C"
+    sleep 1
+  done
+
+  WM_PID=`cat /tmp/$UID-wm.pid`
+  sleep 0.5
+
+  xrefresh
+  if [ -n "$WM_PID" ];then
+    status "terminating WM"
+    kill -HUP $WM_PID
+  fi
+}
+
+LOG="/tmp/$UID-logout.log"
+(logout_process > $LOG) &

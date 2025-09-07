@@ -71,6 +71,7 @@
   ),
   (Windows, WINDOWS_MENU),
   ("Show Workspace", EXEC, "/Library/bin/nxworkspace --fileviewer"),
+  ("System Preferences...", EXEC, "/Library/bin/gopen -a Preferences"),
   (
     "Show Launcher",
     SHORTCUT,

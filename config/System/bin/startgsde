@@ -19,16 +19,17 @@ function continue_in_wm  {
   echo "windowmanager running on $WMAKER_BIN_PID"
   echo "$WMAKER_BIN_PID" > /tmp/$UID-wm.pid
 
-  echo "about to autostart apps"
+  show_status "about to autostart apps"
   /Library/Scripts/AutoLaunchApps
 
-  echo "about to start Notification Monitor"
+  show_status "about to start Notification Monitor"
   /System/Applications/NotMon.app/NotMon -GSSuppressAppIcon YES -autolaunch YES &
   echo "$!" > /tmp/$UID-notmon.pid
 
-  echo "about to start Gesture Helper"
+  show_status "about to start Gesture Helper"
   /System/Applications/GestureHelper.app/GestureHelper -GSSuppressAppIcon YES -autolaunch YES &
   echo "$!" > /tmp/$UID-ghelper.pid
+  xrefresh
 }
 
 function start_services {
@@ -124,6 +125,11 @@ function init_config {
 
     mkdir "$HOME/Library/Preferences/.NextSpace" 2>/dev/null
     cp /Library/Preferences/.NextSpace/* "$HOME/Library/Preferences/.NextSpace"
+  fi
+
+  HN=`hostname`
+  if [ -n "$HN" ];then
+    defaults write org.gnustep.GWorkspace WorkspaceName "$HN"
   fi
 
   TZ=`defaults read NSGlobalDomain "Local Time Zone" 2>/dev/null`
