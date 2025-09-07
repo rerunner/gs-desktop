@@ -127,11 +127,6 @@ function init_config {
     cp /Library/Preferences/.NextSpace/* "$HOME/Library/Preferences/.NextSpace"
   fi
 
-  HN=`hostname`
-  if [ -n "$HN" ];then
-    defaults write org.gnustep.GWorkspace WorkspaceName "$HN"
-  fi
-
   TZ=`defaults read NSGlobalDomain "Local Time Zone" 2>/dev/null`
   TZ=${TZ:33}
   if [ -n "$TZ" ]; then
@@ -159,6 +154,11 @@ function init_config {
   if [ $? -ne 0 ]; then
     echo "setting default backend to Cairo"
     defaults write NSGlobalDomain "GSBackend" "cairo"
+  fi
+
+  HN=`hostname`
+  if [ -n "$HN" ];then
+    defaults write GWorkspace WorkspaceName "$HN"
   fi
 
   /System/bin/mkfontconfig
