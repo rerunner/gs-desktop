@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "/sbin/poweroff" > "$GS_DESKTOP_LOGOUT_CMD"
+/Library/Scripts/WorkspaceLogout
