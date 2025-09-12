@@ -79,5 +79,9 @@
     EXEC,
     "/Library/Scripts/ShowLauncher"
   ),
-  (Logout, EXEC, "/Library/Scripts/WorkspaceLogout")
+  (
+    Logout,
+    ("Terminate User Session", EXEC, "/Library/Scripts/WorkspaceLogout"),
+    ("Power Off", EXEC, "/Library/Scripts/WorkspacePoweroff")
+  )
 )

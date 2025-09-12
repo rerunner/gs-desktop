@@ -212,6 +212,13 @@ function main_process {
   start_windowmanager
 }
 
+function exec_last_wish {
+  if [ -f "$GS_DESKTOP_LOGOUT_CMD" ];then
+    echo "exec command after logout"
+    source "$GS_DESKTOP_LOGOUT_CMD"
+  fi
+}
+
 function cleanup {
   echo "cleaning up..."
 
@@ -224,8 +231,11 @@ function cleanup {
   show_status "the end" "black"
   echo -e "\e[3;0;0t\ePtmux;\e\e[3;0;0t\e\\"
 
+  exec_last_wish
+
   sleep 0.5
   pkill -P "$$"
+
   exit 0
 }
 
@@ -276,9 +286,6 @@ fi
 
 show_status "the beginning" "black"
 
-## clean up
-rm -R "/tmp/GNUstepSecure$UID" 2>/dev/null
-
 ## set system env variables
 export WMAKER_USER_ROOT="$HOME/Library/WindowMaker"
 export PATH="/System/bin:/Library/bin:$HOME/Library/Scripts:/Library/Scripts:$PATH"
@@ -286,11 +293,16 @@ export MANPATH=":/System/share/man:/Library/Documentation/man"
 export GS_DESKTOP_LOG="/tmp/$UID-gs-desktop.log"
 export GS_DESKTOP_ID="$$"
 export BROWSER="/Library/bin/nxbrowser"
+export GS_DESKTOP_LOGOUT_CMD="/tmp/$UID-logout.cmd"
 
 ## unset envs in case we are running from a terminal window
 unset XTERM_VERSION
 unset XTERM_SHELL
 unset XTERM_LOCAL
+
+## clean up
+rm -R "/tmp/GNUstepSecure$UID" 2>/dev/null
+rm "$GS_DESKTOP_LOGOUT_CMD" 2>/dev/null
 
 source /Developer/Makefiles/GNUstep.sh
 
