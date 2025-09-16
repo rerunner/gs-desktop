@@ -23,7 +23,7 @@ build_kit() {
   gmake $MKARGS || exit 1
   gmake install || exit 1
 
-  ldconfig
+  /sbin/ldconfig
 }
 
 build_kit "StepTalk Kit" "../../libs-steptalk"

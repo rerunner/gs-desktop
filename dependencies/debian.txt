@@ -44,6 +44,7 @@ libffcall-dev
 libxml2-dev
 libxslt-dev
 libpth-dev
+libpthreadpool-dev
 openssl
 libvncserver-dev
 libtiff-dev

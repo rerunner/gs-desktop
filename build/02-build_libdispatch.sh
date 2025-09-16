@@ -44,4 +44,4 @@ cmake .. \
 gmake $MKARGS || exit 1
 gmake install || exit 1
 
-ldconfig
+/sbin/ldconfig
